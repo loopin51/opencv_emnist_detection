@@ -16,11 +16,15 @@ import tensorflow_datasets as tfds
 
 # 데이터 전처리 함수 정의
 def preprocess(image, label):
-    image = tf.image.resize(image, (96, 96))  # MobileNetV2는 96x96 이상 크기 필요
-    image = tf.cast(image, tf.float32) / 255.0
-    image = tf.expand_dims(image, axis=-1)
-    image = tf.tile(image, [1, 1, 3])  # 흑백 이미지를 3채널로 변환
-    label = label - 1
+    # 이미지를 (96, 96)으로 크기 조정
+    image = tf.image.resize(image, (96, 96))
+    image = tf.cast(image, tf.float32) / 255.0  # 0-1 사이로 정규화
+    
+    # 이미지가 흑백이라 채널이 1개인데 이를 3채널로 확장
+    if image.shape[-1] == 1:
+        image = tf.image.grayscale_to_rgb(image)  # 1채널을 3채널로 변환
+    
+    label = label - 1  # 레이블을 0-25 범위로 맞춤 (A-Z)
     return image, label
 
 # 데이터 전처리 적용
