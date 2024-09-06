@@ -27,7 +27,7 @@ ds_train = ds_train.map(preprocess, num_parallel_calls=tf.data.AUTOTUNE)
 ds_test = ds_test.map(preprocess, num_parallel_calls=tf.data.AUTOTUNE)
 
 # 배치 처리 및 캐싱
-BATCH_SIZE = 64
+BATCH_SIZE = 32
 ds_train = ds_train.batch(BATCH_SIZE).cache().prefetch(buffer_size=tf.data.AUTOTUNE)
 ds_test = ds_test.batch(BATCH_SIZE).cache().prefetch(buffer_size=tf.data.AUTOTUNE)
 
