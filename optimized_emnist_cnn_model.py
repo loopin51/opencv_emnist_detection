@@ -28,8 +28,8 @@ ds_test = ds_test.map(preprocess, num_parallel_calls=tf.data.AUTOTUNE)
 
 # 배치 처리 및 캐싱
 BATCH_SIZE = 32
-ds_train = ds_train.batch(BATCH_SIZE).cache().prefetch(buffer_size=tf.data.AUTOTUNE)
-ds_test = ds_test.batch(BATCH_SIZE).cache().prefetch(buffer_size=tf.data.AUTOTUNE)
+ds_train = ds_train.batch(BATCH_SIZE).prefetch(buffer_size=tf.data.AUTOTUNE)
+ds_test = ds_test.batch(BATCH_SIZE).prefetch(buffer_size=tf.data.AUTOTUNE)
 
 # 데이터 증강 레이어 추가 (텐서플로우 내장)
 data_augmentation = Sequential([
@@ -39,7 +39,7 @@ data_augmentation = Sequential([
 ])
 
 # MobileNetV2 기반 모델 로드
-base_model = MobileNetV2(input_shape=(96, 96, 3), include_top=False, weights='imagenet')
+base_model = MobileNetV2(input_shape=(96, 96, 3), include_top=False, weights='imagenet',alpha=0.5)
 
 # 모델 구조 설정
 model = Sequential([
