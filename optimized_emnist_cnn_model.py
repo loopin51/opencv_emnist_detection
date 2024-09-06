@@ -77,3 +77,5 @@ model.fit(ds_train, epochs=10, validation_data=ds_test, callbacks=[lr_scheduler]
 
 # 모델 저장
 model.save('optimized_emnist_cnn_model.h5')
+
+#ValueError: Shape must be rank 4 but is rank 3 for '{{node Tile}} = Tile[T=DT_FLOAT, Tmultiples=DT_INT32](ExpandDims, Tile/multiples)' with input shapes: [96,96,1,1], [3].
