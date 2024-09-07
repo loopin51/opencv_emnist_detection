@@ -1,6 +1,11 @@
 import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten, Dropout, RandomFlip, RandomRotation, RandomZoom
+from tensorflow.keras.applications import MobileNetV2
+import tensorflow_datasets as tfds
 
 # 학습된 CNN 모델 로드
 model = load_model('optimized_emnist_cnn_model.h5')
@@ -11,7 +16,7 @@ alphabet_labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # 글자를 예측하는 함수
 def predict_letter(img):
     img = cv2.resize(img, (96, 96))  # 모델에 맞는 크기로 변경
-    img = img.reshape(1, 96, 96, 3)  # 모델이 요구하는 형식으로 변경
+    img = img.reshape(1, 96, 96, 3)  # 모델이 요구하는 형식으로 변경 (3채널)
     img = img / 255.0  # 정규화
     result = model.predict([img])
     return alphabet_labels[np.argmax(result)]
