@@ -16,6 +16,7 @@ alphabet_labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 # 글자를 예측하는 함수
 def predict_letter(img):
     img = cv2.resize(img, (96, 96))  # 모델에 맞는 크기로 변경
+    np.stack((img,)*3, axis=-1)
     img = img.reshape(1, 96, 96, 3)  # 모델이 요구하는 형식으로 변경 (3채널)
     img = img / 255.0  # 정규화
     result = model.predict([img])
