@@ -3,7 +3,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 # 학습된 SavedModel 형식의 CNN 모델 로드 (디렉토리 경로를 입력)
-model = load_model('path_to_saved_model_directory')  # 모델이 저장된 디렉토리 경로를 지정하세요
+model = load_model('saved_model_format')  # 모델이 저장된 디렉토리 경로를 지정하세요
 
 # 알파벳 레이블
 alphabet_labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
